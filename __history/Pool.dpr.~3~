@@ -1,0 +1,16 @@
+program Pool;
+
+uses
+  Forms,
+  Unit1 in 'Unit1.pas' {mainform},
+  mManager in 'mManager.pas' {machineManager},
+  Models in 'Models.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(Tmainform, mainform);
+  Application.CreateForm(TmachineManager, machineManager);
+  Application.Run;
+end.

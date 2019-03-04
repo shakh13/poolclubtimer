@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.883,=C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.303,=C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.951,C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\Unit2.pas=C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\mAddForm.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.733,=C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.731,C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\Unit2.pas=C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\mDeleteForm.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.788,=C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.758,C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\Models.pas=C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.246,C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\Unit2.dfm=C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\mManager.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.951,C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\Unit2.dfm=C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\mAddForm.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.731,C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\Unit2.dfm=C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\mDeleteForm.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.246,C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\Unit2.pas=C:\Users\Shaxzod\Documents\Embarcadero\Studio\Projects\pool\mManager.pas</Transaction>
+  </Transactions>
+</BorlandProject>
