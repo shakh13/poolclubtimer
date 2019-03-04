@@ -20,9 +20,9 @@ object machineAddForm: TmachineAddForm
   object Label1: TLabel
     Left = 0
     Top = 0
-    Width = 68
+    Width = 27
     Height = 13
-    Caption = 'Machine name'
+    Caption = 'Name'
   end
   object Edit1: TEdit
     Left = 0
