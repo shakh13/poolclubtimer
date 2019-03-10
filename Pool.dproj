@@ -157,6 +157,10 @@
             <Form>SettingsForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="cashF.pas">
+            <Form>cashForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="ModelSupport_Pool\default.txaPackage"/>
         <None Include="ModelSupport_Pool\default.txvpck"/>
         <None Include="ModelSupport_Pool\Models\default.txvpck"/>
@@ -196,7 +200,7 @@
                 <Platform value="Win64">True</Platform>
             </Platforms>
             <Deployment Version="3">
-                <DeployFile LocalName="ModelSupport_Pool\mManager\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_Pool\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
@@ -226,13 +230,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_Pool\Unit1\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_Pool\mManager\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_Pool\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_Pool\Unit1\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>

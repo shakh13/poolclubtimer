@@ -2,7 +2,7 @@ object mainform: Tmainform
   Left = 195
   Top = 138
   Caption = 'Pool Control'
-  ClientHeight = 444
+  ClientHeight = 441
   ClientWidth = 784
   Color = clBtnFace
   Constraints.MinHeight = 500
@@ -25,12 +25,12 @@ object mainform: Tmainform
     Left = 0
     Top = 51
     Width = 560
-    Height = 393
+    Height = 390
     Align = alClient
     ColCount = 7
     RowCount = 3
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect]
-    PopupMenu = PopupMenu1
+    PopupMenu = popup
     ScrollBars = ssVertical
     TabOrder = 0
     OnClick = tablesClick
@@ -47,7 +47,7 @@ object mainform: Tmainform
     Left = 560
     Top = 51
     Width = 224
-    Height = 393
+    Height = 390
     Align = alRight
     BevelOuter = bvLowered
     BorderWidth = 5
@@ -73,11 +73,11 @@ object mainform: Tmainform
       Left = 6
       Top = 43
       Width = 212
-      Height = 344
+      Height = 341
       Style = lbOwnerDrawFixed
       Align = alClient
       ItemHeight = 36
-      PopupMenu = PopupMenu1
+      PopupMenu = popup
       TabOrder = 0
       OnClick = tableslistClick
       OnDrawItem = tableslistDrawItem
@@ -616,6 +616,7 @@ object mainform: Tmainform
       ShowHint = True
       Spacing = 0
       StyleElements = []
+      OnClick = SpeedButton2Click
     end
   end
   object MainMenu1: TMainMenu
@@ -632,9 +633,17 @@ object mainform: Tmainform
       end
     end
   end
-  object PopupMenu1: TPopupMenu
+  object popup: TPopupMenu
+    OnPopup = popupPopup
     Left = 648
     Top = 8
+    object ActivateVIP1: TMenuItem
+      Caption = 'Activate VIP'
+      OnClick = ActivateVIP1Click
+    end
+    object Stop1: TMenuItem
+      Caption = 'Stop'
+    end
   end
   object XPManifest1: TXPManifest
     Left = 584
