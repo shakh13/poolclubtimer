@@ -37,7 +37,7 @@ procedure TmachineManager.FormCreate(Sender: TObject);
 begin
   machinesgrid.Cells[0,0] := 'ID';
   machinesgrid.Cells[1,0] := 'Name';
-  machinesgrid.Cells[2,0] := 'Last used';
+  machinesgrid.Cells[2,0] := 'Port';
   machinesgrid.Cells[3,0] := 'Status';
   machinesgrid.Cells[4,0] := 'Created at';
 end;
@@ -62,7 +62,7 @@ begin
             begin
               machinesgrid.Cells[0, i] := query.FieldByName('id').AsString;
               machinesgrid.Cells[1, i] := query.FieldByName('machine_name').AsString;
-              machinesgrid.Cells[2, i] := datetimetostr(UnixToDateTime(query.FieldByName('last_used').AsInteger));
+              machinesgrid.Cells[2, i] := query.FieldByName('port').AsString;
               machinesgrid.Cells[3, i] := statusToStr(query.FieldByName('status').AsInteger);
               machinesgrid.Cells[4, i] := datetimetostr(UnixToDateTime(query.FieldByName('created_at').AsInteger));
               query.Next;

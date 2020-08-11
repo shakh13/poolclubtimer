@@ -19,19 +19,21 @@ type
 
   public
     constructor Create(uname, pass: String);
+
+
   end;
 
 type
   TMachine = class
     machine_id: Integer;
     machine_name: WideString;
-    machine_last_used: Integer;
+    machine_port: Integer;
     machine_status: Integer;
     machine_created_at: Integer;
   private
 
   public
-    procedure Add(n: String);
+    procedure Add(n: String; port: String);
     procedure Delete(i: Integer);
   end;
 
@@ -75,14 +77,14 @@ end;
 
 { TMachine }
 
-procedure TMachine.Add(n: String);
+procedure TMachine.Add(n: String; port: String);
 var query: TFDQuery;
 begin
   query := mainform.fdquery;
   if query.Connection.Connected then
     begin
       query.Close;
-      query.SQL.Text := 'INSERT INTO machines (machine_name, created_at) VALUES ('''+n+''', '+IntToStr(DateTimeToUnix(Now()))+')';
+      query.SQL.Text := 'INSERT INTO machines (machine_name, port, created_at) VALUES ('''+n+''', ''' + port + ''', '+IntToStr(DateTimeToUnix(Now()))+')';
       query.ExecSQL;
     end
   else

@@ -1,3 +1,83 @@
+{$A8,B-,C+,D+,E-,F-,G+,H+,I+,J-,K-,L+,M-,N+,O+,P+,Q-,R-,S-,T-,U-,V+,W-,X+,Y+,Z1}
+{$MINSTACKSIZE $00004000}
+{$MAXSTACKSIZE $00100000}
+{$IMAGEBASE $00400000}
+{$APPTYPE GUI}
+{$WARN SYMBOL_DEPRECATED ON}
+{$WARN SYMBOL_LIBRARY ON}
+{$WARN SYMBOL_PLATFORM ON}
+{$WARN SYMBOL_EXPERIMENTAL ON}
+{$WARN UNIT_LIBRARY ON}
+{$WARN UNIT_PLATFORM ON}
+{$WARN UNIT_DEPRECATED ON}
+{$WARN UNIT_EXPERIMENTAL ON}
+{$WARN HRESULT_COMPAT ON}
+{$WARN HIDING_MEMBER ON}
+{$WARN HIDDEN_VIRTUAL ON}
+{$WARN GARBAGE ON}
+{$WARN BOUNDS_ERROR ON}
+{$WARN ZERO_NIL_COMPAT ON}
+{$WARN STRING_CONST_TRUNCED ON}
+{$WARN FOR_LOOP_VAR_VARPAR ON}
+{$WARN TYPED_CONST_VARPAR ON}
+{$WARN ASG_TO_TYPED_CONST ON}
+{$WARN CASE_LABEL_RANGE ON}
+{$WARN FOR_VARIABLE ON}
+{$WARN CONSTRUCTING_ABSTRACT ON}
+{$WARN COMPARISON_FALSE ON}
+{$WARN COMPARISON_TRUE ON}
+{$WARN COMPARING_SIGNED_UNSIGNED ON}
+{$WARN COMBINING_SIGNED_UNSIGNED ON}
+{$WARN UNSUPPORTED_CONSTRUCT ON}
+{$WARN FILE_OPEN ON}
+{$WARN FILE_OPEN_UNITSRC ON}
+{$WARN BAD_GLOBAL_SYMBOL ON}
+{$WARN DUPLICATE_CTOR_DTOR ON}
+{$WARN INVALID_DIRECTIVE ON}
+{$WARN PACKAGE_NO_LINK ON}
+{$WARN PACKAGED_THREADVAR ON}
+{$WARN IMPLICIT_IMPORT ON}
+{$WARN HPPEMIT_IGNORED ON}
+{$WARN NO_RETVAL ON}
+{$WARN USE_BEFORE_DEF ON}
+{$WARN FOR_LOOP_VAR_UNDEF ON}
+{$WARN UNIT_NAME_MISMATCH ON}
+{$WARN NO_CFG_FILE_FOUND ON}
+{$WARN IMPLICIT_VARIANTS ON}
+{$WARN UNICODE_TO_LOCALE ON}
+{$WARN LOCALE_TO_UNICODE ON}
+{$WARN IMAGEBASE_MULTIPLE ON}
+{$WARN SUSPICIOUS_TYPECAST ON}
+{$WARN PRIVATE_PROPACCESSOR ON}
+{$WARN UNSAFE_TYPE OFF}
+{$WARN UNSAFE_CODE OFF}
+{$WARN UNSAFE_CAST OFF}
+{$WARN OPTION_TRUNCATED ON}
+{$WARN WIDECHAR_REDUCED ON}
+{$WARN DUPLICATES_IGNORED ON}
+{$WARN UNIT_INIT_SEQ ON}
+{$WARN LOCAL_PINVOKE ON}
+{$WARN MESSAGE_DIRECTIVE ON}
+{$WARN TYPEINFO_IMPLICITLY_ADDED ON}
+{$WARN RLINK_WARNING ON}
+{$WARN IMPLICIT_STRING_CAST ON}
+{$WARN IMPLICIT_STRING_CAST_LOSS ON}
+{$WARN EXPLICIT_STRING_CAST OFF}
+{$WARN EXPLICIT_STRING_CAST_LOSS OFF}
+{$WARN CVT_WCHAR_TO_ACHAR ON}
+{$WARN CVT_NARROWING_STRING_LOST ON}
+{$WARN CVT_ACHAR_TO_WCHAR ON}
+{$WARN CVT_WIDENING_STRING_LOST ON}
+{$WARN NON_PORTABLE_TYPECAST ON}
+{$WARN XML_WHITESPACE_NOT_ALLOWED ON}
+{$WARN XML_UNKNOWN_ENTITY ON}
+{$WARN XML_INVALID_NAME_START ON}
+{$WARN XML_INVALID_NAME ON}
+{$WARN XML_EXPECTED_CHARACTER ON}
+{$WARN XML_CREF_NO_RESOLVE ON}
+{$WARN XML_NO_PARM ON}
+{$WARN XML_NO_MATCHING_PARM ON}
+{$WARN IMMUTABLE_STRINGS OFF}
 unit Unit1;
 
 interface
@@ -10,7 +90,8 @@ uses
   FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
   FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client, FireDAC.Stan.Param,
   FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet,
-  Vcl.ToolWin, Vcl.ComCtrls, Vcl.Buttons, System.DateUtils, INIFiles;
+  Vcl.ToolWin, Vcl.ComCtrls, Vcl.Buttons, System.DateUtils, INIFiles, Models,
+  CPortCtl;
 
 type
   Tmainform = class(TForm)
@@ -27,29 +108,47 @@ type
     comport: TComPort;
     fdconnection: TFDConnection;
     fdquery: TFDQuery;
-    ToolBar1: TToolBar;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
+    toolbar: TToolBar;
+    machinesManagerButton: TSpeedButton;
+    cashButton: TSpeedButton;
     query: TFDQuery;
     FDManager1: TFDManager;
-    Options1: TMenuItem;
+    mainMenuOptionsButton: TMenuItem;
     Settings1: TMenuItem;
     Stop1: TMenuItem;
     ActivateVIP1: TMenuItem;
+    historyButton: TSpeedButton;
+    usersManagerButton: TSpeedButton;
+    Close1: TMenuItem;
+    Logout1: TMenuItem;
+    N1: TMenuItem;
+    stopButton: TSpeedButton;
+    portSetupBtn: TSpeedButton;
+    ComLed1: TComLed;
     procedure FormResize(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure tableslistDrawItem(Control: TWinControl; Index: Integer;
       Rect: TRect; State: TOwnerDrawState);
     procedure showtimerTimer(Sender: TObject);
     procedure timerTimer(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
+    procedure machinesManagerButtonClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Settings1Click(Sender: TObject);
     procedure tableslistClick(Sender: TObject);
     procedure tablesClick(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
-    procedure popupPopup(Sender: TObject);
+    procedure cashButtonClick(Sender: TObject);
     procedure ActivateVIP1Click(Sender: TObject);
+    procedure Stop1Click(Sender: TObject);
+    procedure Close1Click(Sender: TObject);
+    procedure Logout1Click(Sender: TObject);
+    procedure usersManagerButtonClick(Sender: TObject);
+    procedure historyButtonClick(Sender: TObject);
+    procedure stopButtonClick(Sender: TObject);
+    procedure portSetupBtnClick(Sender: TObject);
+    procedure comportAfterClose(Sender: TObject);
+    procedure comportAfterOpen(Sender: TObject);
+    procedure comportRxChar(Sender: TObject; Count: Integer);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
     procedure TablesProcess(Row: Integer; Percent: Real;
@@ -58,7 +157,11 @@ type
     function SecondToHours(s: Extended): String;
     function ZeroToDoubleZero(z: Integer): String;
     procedure activateTimeItemClick(Sender: TObject);
+
+    procedure turnLED(mID: Integer; open: Char);
   public
+    user: TUser;
+    function getPrice: Integer;
     { Public declarations }
   end;
 
@@ -67,23 +170,24 @@ var
   price: Integer;
   poolicon: TIcon;
   mainform: Tmainform;
-
+  priceINI: TINIFile;
+  portSettingsPath: String;
   finishedTimerList: TStringList;
 
 implementation
 
 {$R *.dfm}
 
-uses mManager, Models, SettingsF, cashF;
+uses mManager, SettingsF, cashF, lofinF, usersManagerF, historyF;
 
 procedure DrawTheText(const hDC: hDC; const Font: TFont; var Text: string;
   aRect: TRect);
 var
   lRect: TRect;
+  textcenter: Integer;
 begin
   with TBitmap.Create do
     try
-
       Width := aRect.Right - aRect.Left;
       Height := aRect.Bottom - aRect.Top;
       lRect := Rect(0, 0, Width, Height);
@@ -91,7 +195,9 @@ begin
       Canvas.Brush.Color := clBlack;
       Canvas.FillRect(lRect);
       Canvas.Font.Color := clWhite;
-      Canvas.TextRect(lRect, 5, 5, Text);
+      Canvas.Font.Style := [fsbold];
+      textcenter := trunc((Width - Canvas.TextWidth(Text)) / 2);
+      Canvas.TextRect(lRect, textcenter, 5, Text);
       BitBlt(hDC, aRect.Left, aRect.Top, Width, Height, Canvas.Handle, 0, 0,
         SRCINVERT);
     finally
@@ -119,64 +225,62 @@ procedure Tmainform.FormShow(Sender: TObject);
 var
   i: Integer;
 begin
+  if not user.Exists then
+    begin
+      timer.Enabled := false;
+      loginForm.ShowModal;
+    end;
+
   tableslist.Clear;
   if fdconnection.Connected then
-  begin
-    fdquery.Close;
-    fdquery.Open('SELECT * FROM machines WHERE status=1 ORDER BY id');
-    tables.RowCount := fdquery.RecordCount + 1;
-    if fdquery.RecordCount > 0 then
     begin
-      fdquery.First;
-      for i := 1 to fdquery.RecordCount do
+      fdquery.Close;
+      fdquery.Open('SELECT * FROM machines WHERE status=1 ORDER BY id');
+      tables.RowCount := fdquery.RecordCount + 1;
+      if fdquery.RecordCount > 0 then
       begin
-        tables.Cells[0, i] := fdquery.FieldByName('id').AsString;
-        tables.Cells[1, i] := fdquery.FieldByName('machine_name').AsString;
+        fdquery.First;
+        for i := 1 to fdquery.RecordCount do
+        begin
+          tables.Cells[0, i] := fdquery.FieldByName('id').AsString;
+          tables.Cells[1, i] := fdquery.FieldByName('machine_name').AsString;
 
-        tableslist.Items.Add(fdquery.FieldByName('machine_name').AsString);
-        fdquery.Next;
-      end;
+          tableslist.Items.Add(fdquery.FieldByName('machine_name').AsString);
+          fdquery.Next;
+        end;
 
-    end
+        timer.Enabled := true; // turn on timer======================+++++++++++++
+
+      end
     else
-    begin
-      // No machines
-    end;
+      begin
+        // No machines
+      end;
   end
   else
-  begin
-    ShowMessage('Cannot connect to DB. Please restart the application.');
-    Close;
-  end;
+    begin
+      ShowMessage('Cannot connect to DB. Please restart the application.');
+      Close;
+    end;
 
 end;
 
-procedure Tmainform.popupPopup(Sender: TObject);
-var
-  id: String;
+function Tmainform.getPrice: Integer;
 begin
-  if (tables.Row > 0) and (Length(tables.Cells[0, tables.Row]) > 0) then
-  begin
-    id := tables.Cells[0, tables.Row];
-    query.Close;
-    query.Open('SELECT * FROM timer WHERE machine_id=' + id + ' AND status=1');
-    if query.RecordCount > 0 then
-    begin
-      // Enable stop button
-      // Disable activate vip button
-      popup.Items.Find('Stop').Enabled := true;
-      popup.Items.Find('Activate VIP').Enabled := false;
-      popup.Items.Find('Activate Time').Enabled := false;
-    end
-    else
-    begin
-      // Disable stop button
-      // Enable activate vip button
-      popup.Items.Find('Stop').Enabled := false;
-      popup.Items.Find('Activate VIP').Enabled := true;
-      popup.Items.Find('Activate Time').Enabled := true;
-    end;
-  end;
+  result:=price;
+end;
+
+procedure Tmainform.historyButtonClick(Sender: TObject);
+begin
+  historyForm.ShowModal;
+end;
+
+procedure Tmainform.Logout1Click(Sender: TObject);
+begin
+  user.Exists := false;
+  timer.Enabled := false;
+  Hide;
+  loginForm.ShowModal;
 end;
 
 function Tmainform.SecondToHours(s: Extended): String;
@@ -199,14 +303,80 @@ begin
   SettingsForm.ShowModal;
 end;
 
-procedure Tmainform.SpeedButton1Click(Sender: TObject);
+procedure Tmainform.machinesManagerButtonClick(Sender: TObject);
 begin
   machineManager.ShowModal;
 end;
 
-procedure Tmainform.SpeedButton2Click(Sender: TObject);
+procedure Tmainform.cashButtonClick(Sender: TObject);
 begin
   cashForm.ShowModal;
+end;
+
+procedure Tmainform.stopButtonClick(Sender: TObject);
+begin
+  Stop1.Click;
+end;
+
+procedure Tmainform.portSetupBtnClick(Sender: TObject);
+begin
+  if not comport.Connected then
+    begin
+      try
+        comport.ShowSetupDialog;
+        comport.Connected := true;
+        comport.StoreSettings(stIniFile, portSettingsPath);
+      except
+        ShowMessage('Cannot connect to port');
+      end;
+    end
+  else
+    begin
+      if MessageDlg('Do you really want to disconnect?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+        comport.Connected := false
+      else
+        comport.Connected := true;
+    end;
+end;
+
+procedure Tmainform.Stop1Click(Sender: TObject);
+var
+  cash: Integer;
+  timeleft: Integer;
+  timeprice: Integer;
+  I: Integer;
+  timerID: String;
+  finishes: Integer;
+begin
+  fdquery.Close;
+  fdquery.SQL.Text := 'SELECT * FROM timer WHERE status=1 AND machine_id=' + tables.Cells[0, tables.Row];
+  fdquery.Open;
+
+  if fdquery.RecordCount = 1 then
+    begin
+      timeleft := DateTimeToUnix(now) - fdquery.FieldByName('created_at').AsInteger;
+      timeprice := round(timeleft / 3600 * price);
+      cash := priceINI.ReadInteger('cash', 'c', 0);
+      priceINI.WriteInteger('cash', 'c', cash + timeprice);
+
+      if (fdquery.FieldByName('is_vip').AsInteger = 1) then
+        finishes := DateTimeToUnix(now)
+      else
+        finishes := fdquery.FieldByName('finishes').AsInteger;
+
+      timerID := fdquery.FieldByName('id').AsString;
+
+      fdquery.Close;
+      fdquery.SQL.Text := 'UPDATE timer SET status=0, finishes='+IntToStr(finishes)+' WHERE id=' + timerID;
+      fdquery.ExecSQL;
+
+      turnLED(StrToInt(tables.Cells[0, tables.Row]), '0');
+
+      Application.MessageBox(pchar('Stoped machine ' + tables.Cells[1, tables.Row] + #13#10 + 'Price: ' + IntToStr(timeprice)), 'Timer End', MB_OK);
+    end;
+
+    Stop1.Enabled := false;
+    stopButton.Enabled := false;
 end;
 
 procedure Tmainform.activateTimeItemClick(Sender: TObject);
@@ -234,16 +404,14 @@ begin
 
   seconds := round(sum * 3600 / price);
 
-  ShowMessage(cap + ' ' + tables.Cells[0, tables.Row]);
-
   fdquery.Close;
   fdquery.SQL.Text := 'INSERT INTO timer (machine_id, finishes, status, created_at) VALUES ('
     + tables.Cells[0, tables.Row]
     + ', ' + IntToStr(DateTimeToUnix(now) + seconds) + ', 1, '
     + IntToStr(DateTimeToUnix(now)) + ')';
   fdquery.ExecSQL;
-  // add time to machine -------------------------------------------------------
 
+  turnLED(StrToInt(tables.Cells[0, tables.Row]), '1'); // Turn ON the LED
 end;
 
 procedure Tmainform.ActivateVIP1Click(Sender: TObject);
@@ -252,6 +420,31 @@ begin
   fdquery.SQL.Text := 'INSERT INTO timer (machine_id, is_vip, status, created_at) VALUES ('
     + tables.Cells[0, tables.ROW]+', 1, 1, ' + IntToStr(DateTimeToUnix(now)) + ')';
   fdquery.ExecSQL;
+  turnLED(StrToInt(tables.Cells[0, tables.Row]), '1'); // Turn ON the LED
+end;
+
+procedure Tmainform.Close1Click(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure Tmainform.comportAfterClose(Sender: TObject);
+begin
+  comled1.Kind := lkRedLight;
+end;
+
+procedure Tmainform.comportAfterOpen(Sender: TObject);
+begin
+  comled1.Kind := lkGreenLight;
+  comport.WriteStr('hello' + #13#10);
+end;
+
+procedure Tmainform.comportRxChar(Sender: TObject; Count: Integer);
+var
+  r: String;
+begin
+  comport.ReadStr(r, Count);
+  caption := r;
 end;
 
 function Tmainform.FindRowById(id: String): Integer;
@@ -269,14 +462,20 @@ begin
   result := 0;
 end;
 
+procedure Tmainform.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  fdconnection.Connected := false;
+end;
+
 procedure Tmainform.FormCreate(Sender: TObject);
 var
-  ini: TIniFile;
   i: Integer;
   newTimeItem: TMenuItem;
   activateTimeItem: TMenuItem;
 begin
   randomize;
+
+  user := TUser.Create('', '');
 
   finishedTimerList := TStringList.Create;
 
@@ -284,8 +483,10 @@ begin
   poolicon := TIcon.Create;
   poolicon.LoadFromFile('poolico.ico');
 
-  ini := TIniFile.Create(extractfilepath(paramstr(0)) + 'price.ini');
-  price := ini.ReadInteger('pr', 'pri', 10000);
+  priceINI := TIniFile.Create(extractfilepath(paramstr(0)) + 'settings.ini');
+  price := priceINI.ReadInteger('pr', 'pri', 10000);
+  portSettingsPath := extractfilepath(paramstr(0)) + 'settings.ini';
+  comport.LoadSettings(stIniFile, portSettingsPath);
 
   tables.Cells[0, 0] := '#';
   tables.Cells[1, 0] := 'Name';
@@ -316,13 +517,41 @@ begin
 end;
 
 procedure Tmainform.tablesClick(Sender: TObject);
+var
+  id: String;
 begin
   tableslist.ItemIndex := tables.Row - 1;
+
+  if (tables.Row > 0) and (Length(tables.Cells[0, tables.Row]) > 0) then
+  begin
+    id := tables.Cells[0, tables.Row];
+    query.Close;
+    query.Open('SELECT * FROM timer WHERE machine_id=' + id + ' AND status=1');
+    if query.RecordCount > 0 then
+    begin
+      // Enable stop button
+      // Disable activate vip button
+      popup.Items.Find('Stop').Enabled := true;
+      stopButton.Enabled := true;
+      popup.Items.Find('Activate VIP').Enabled := false;
+      popup.Items.Find('Activate Time').Enabled := false;
+    end
+    else
+    begin
+      // Disable stop button
+      // Enable activate vip button
+      popup.Items.Find('Stop').Enabled := false;
+      stopButton.Enabled := false;
+      popup.Items.Find('Activate VIP').Enabled := true;
+      popup.Items.Find('Activate Time').Enabled := true;
+    end;
+  end;
 end;
 
 procedure Tmainform.tableslistClick(Sender: TObject);
 begin
   tables.Row := tableslist.ItemIndex + 1;
+  tables.OnClick(Sender);
 end;
 
 procedure Tmainform.tableslistDrawItem(Control: TWinControl; Index: Integer;
@@ -353,6 +582,7 @@ var
   timeleft: Integer;
   f, d, a, b, c: Double;
   p: Integer;
+  timeprice, cash: Integer;
 begin
   // TablesProcess(1, random(100) / 100, false); -- not VIP
   // TablesProcess(2, 0, true);                  -- VIP
@@ -362,14 +592,13 @@ begin
   try
     query.Close;
     query.Open('SELECT * FROM timer WHERE is_vip=0 AND status=1 AND finishes<=strftime(''%s'',''now'', ''localtime'')');
-      //IntToStr(DateTimeToUnix(now)));
 
     if query.RecordCount > 0 then
     begin
       query.First;
       for i := 1 to query.RecordCount do
       begin
-        // cash plus -------------------------------------------------------------
+
 
         // check if exists timer.id in finishedTimerList
 
@@ -377,12 +606,22 @@ begin
         begin
           finishedTimerList.Add(query.FieldByName('id').AsString);
 
+          // turn off LED begin
+          turnLED(query.FieldByName('machine_id').AsInteger, '0');
+          // turn off LED end
+
           timeleft := query.FieldByName('finishes').AsInteger - query.FieldByName('created_at').AsInteger;
+          timeprice := round((timeleft / 3600) * price);
+
+          // cash plus begin
+          cash := priceINI.ReadInteger('cash', 'c', 0);
+          priceINI.WriteInteger('cash', 'c', cash + timeprice);
+          // cash plus end
 
           Application.MessageBox
             (pchar(tables.Cells[1, FindRowById(query.FieldByName('machine_id').AsString)]
             + ' has been finished.' + #13#10 + 'Sum: ' +
-            IntToStr(round((timeleft / 3600) * price))), 'Timer', MB_OK);
+            IntToStr(timeprice)), 'Timer', MB_OK);
         end;
 
         // end check
@@ -411,58 +650,92 @@ begin
       tables.Cells[0, i];
     query.Open;
     if query.RecordCount > 0 then
-    begin
-      if query.FieldByName('is_vip').AsInteger = 1 then
       begin
-        timeleft := DateTimeToUnix(now) - query.FieldByName('created_at')
-          .AsInteger;
+        if query.FieldByName('is_vip').AsInteger = 1 then
+        begin
+          timeleft := DateTimeToUnix(now) - query.FieldByName('created_at')
+            .AsInteger;
 
-        tables.Cells[2, i] :=
-          datetimetostr(UnixToDateTime(query.FieldByName('created_at')
-          .AsInteger));
-        TablesProcess(i, 0, true);
+          tables.Cells[2, i] :=
+            datetimetostr(UnixToDateTime(query.FieldByName('created_at')
+            .AsInteger));
+          TablesProcess(i, 0, true);
 
-        tables.Cells[4, i] := SecondToHours(timeleft);
+          tables.Cells[4, i] := SecondToHours(timeleft);
 
-        tables.Cells[5, i] := '---';
-        tables.Cells[6, i] := IntToStr(round((timeleft / 3600) * price));
+          tables.Cells[5, i] := '---';
+          tables.Cells[6, i] := IntToStr(round((timeleft / 3600) * price));
 
-        // caption := inttostr(DateTimeToUnix(now));
+          // caption := inttostr(DateTimeToUnix(now));
+        end
+        else
+        begin
+          // not VIP
+          f := query.FieldByName('finishes').AsFloat -
+            query.FieldByName('created_at').AsFloat;
+          d := DateTimeToUnix(now) - query.FieldByName('created_at').AsInteger;
+
+          p := round((d * 100) / f);
+
+          timeleft := round(d);
+
+          tables.Cells[2, i] :=
+            datetimetostr(UnixToDateTime(query.FieldByName('created_at')
+            .AsInteger));
+          TablesProcess(i, p / 100);
+
+          tables.Cells[4, i] := SecondToHours(timeleft);
+
+          tables.Cells[5, i] := SecondToHours(f);
+          tables.Cells[6, i] := IntToStr(round((timeleft / 3600) * price));
+
+        end;
+        turnLED(query.FieldByName('machine_id').AsInteger, '1');
       end
-      else
-      begin
-        // not VIP
-        f := query.FieldByName('finishes').AsFloat -
-          query.FieldByName('created_at').AsFloat;
-        d := DateTimeToUnix(now) - query.FieldByName('created_at').AsInteger;
-
-        p := round((d * 100) / f);
-
-        Caption := floattostr(f) + ' ' + floattostr(d) + ' ' + floattostr(p);
-
-        timeleft := round(d);
-
-        tables.Cells[2, i] :=
-          datetimetostr(UnixToDateTime(query.FieldByName('created_at')
-          .AsInteger));
-        TablesProcess(i, p / 100);
-
-        tables.Cells[4, i] := SecondToHours(timeleft);
-
-        tables.Cells[5, i] := SecondToHours(f);
-        tables.Cells[6, i] := IntToStr(round((timeleft / 3600) * price));
-
-      end;
-    end
     else
-    begin
-      tables.Cells[2, i] := '---';
-      tables.Cells[3, i] := '---';
-      tables.Cells[4, i] := '---';
-      tables.Cells[5, i] := '---';
-      tables.Cells[6, i] := '---';
-    end;
+      begin
+        tables.Cells[2, i] := '---';
+        tables.Cells[3, i] := '---';
+        tables.Cells[4, i] := '---';
+        tables.Cells[5, i] := '---';
+        tables.Cells[6, i] := '---';
+        turnLED(query.FieldByName('machine_id').AsInteger, '0');
+      end;
   end;
+end;
+
+procedure Tmainform.turnLED(mID: Integer; open: Char);
+var
+  machinePort: String;
+begin
+  // GET ARDUINO PIN NUMBER FROM MACHINE AND TURN ON/OFF with 'open'
+
+  {
+    OpenCmd
+    0 -> turn off
+    1 -> turn on
+  }
+  fdquery.Close;
+  fdquery.Open('SELECT * FROM machines WHERE id=' + IntToStr(mId));
+
+  if fdquery.RecordCount > 0 then
+    begin
+      machinePort := fdquery.FieldByName('port').AsString;
+
+      if comport.Connected then
+        begin
+          comport.WriteStr(machinePort + ',' + open + #13#10);
+        end
+      else
+        begin
+          //ShowMessage('Comport not connected.');
+        end;
+    end;
+end;
+
+procedure Tmainform.usersManagerButtonClick(Sender: TObject);
+begin
+  usersManagerForm.ShowModal;
 end;
 
 function Tmainform.ZeroToDoubleZero(z: Integer): String;
@@ -491,9 +764,9 @@ begin
 
   if isVip then
   begin
-    // s:='VIP';
-    // DrawTheText(c.Handle, tables.Font, s, rect);
-    tables.Cells[3, Row] := 'VIP';
+     s:='VIP';
+     DrawTheText(c.Handle, tables.Font, s, rect);
+    //tables.Cells[3, Row] := 'VIP';
   end
   else
   begin
