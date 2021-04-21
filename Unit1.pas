@@ -91,7 +91,7 @@ uses
   FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client, FireDAC.Stan.Param,
   FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet,
   Vcl.ToolWin, Vcl.ComCtrls, Vcl.Buttons, System.DateUtils, INIFiles, Models,
-  CPortCtl;
+  CPortCtl, FireDAC.Phys.SQLiteWrapper.Stat;
 
 type
   Tmainform = class(TForm)
@@ -348,11 +348,28 @@ var
   timerID: String;
   finishes: Integer;
 begin
+  // Delete dublicates
   fdquery.Close;
   fdquery.SQL.Text := 'SELECT * FROM timer WHERE status=1 AND machine_id=' + tables.Cells[0, tables.Row];
   fdquery.Open;
 
-  if fdquery.RecordCount = 1 then
+  if fdquery.RecordCount > 1 then
+    begin
+      fdquery.first;
+      for I := 2 to fdquery.RecordCount do
+        begin
+          query.Close;
+          query.ExecSQL('delete from timer where id=' + fdquery.FieldByName('id').AsString);
+          fdquery.Next;
+        end;
+    end;
+  // end delete
+
+  fdquery.Close;
+  fdquery.SQL.Text := 'SELECT * FROM timer WHERE status=1 AND machine_id=' + tables.Cells[0, tables.Row];
+  fdquery.Open;
+
+  if fdquery.RecordCount > 0 then
     begin
       timeleft := DateTimeToUnix(now) - fdquery.FieldByName('created_at').AsInteger;
       timeprice := round(timeleft / 3600 * price);
@@ -721,15 +738,19 @@ begin
   if fdquery.RecordCount > 0 then
     begin
       machinePort := fdquery.FieldByName('port').AsString;
+      try
+        if comport.Connected then
+          begin
+            comport.WriteStr(machinePort + ',' + open + #13#10);
+          end
+        else
+          begin
+            //ShowMessage('Comport not connected.');
+          end;
+      except
+        comport.Connected := false;
+      end;
 
-      if comport.Connected then
-        begin
-          comport.WriteStr(machinePort + ',' + open + #13#10);
-        end
-      else
-        begin
-          //ShowMessage('Comport not connected.');
-        end;
     end;
 end;
 
