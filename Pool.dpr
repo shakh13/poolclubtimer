@@ -11,12 +11,15 @@ uses
   cashF in 'cashF.pas' {cashForm},
   lofinF in 'lofinF.pas' {loginForm},
   usersManagerF in 'usersManagerF.pas' {usersManagerForm},
-  historyF in 'historyF.pas' {historyForm};
+  historyF in 'historyF.pas' {historyForm},
+  Vcl.Themes,
+  Vcl.Styles;
 
 {$R *.res}
 
 begin
   Application.Initialize;
+  TStyleManager.TrySetStyle('Turquoise Gray');
   Application.CreateForm(Tmainform, mainform);
   Application.CreateForm(TloginForm, loginForm);
   Application.CreateForm(TmachineManager, machineManager);

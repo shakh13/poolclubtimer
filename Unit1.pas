@@ -348,22 +348,8 @@ var
   timerID: String;
   finishes: Integer;
 begin
-  // Delete dublicates
   fdquery.Close;
-  fdquery.SQL.Text := 'SELECT * FROM timer WHERE status=1 AND machine_id=' + tables.Cells[0, tables.Row];
-  fdquery.Open;
-
-  if fdquery.RecordCount > 1 then
-    begin
-      fdquery.first;
-      for I := 2 to fdquery.RecordCount do
-        begin
-          query.Close;
-          query.ExecSQL('delete from timer where id=' + fdquery.FieldByName('id').AsString);
-          fdquery.Next;
-        end;
-    end;
-  // end delete
+  fdquery.ExecSQL('delete from timer where rowid not in (select min(rowid) from timer where status=1 group by machine_id)');
 
   fdquery.Close;
   fdquery.SQL.Text := 'SELECT * FROM timer WHERE status=1 AND machine_id=' + tables.Cells[0, tables.Row];
@@ -437,6 +423,10 @@ begin
   fdquery.SQL.Text := 'INSERT INTO timer (machine_id, is_vip, status, created_at) VALUES ('
     + tables.Cells[0, tables.ROW]+', 1, 1, ' + IntToStr(DateTimeToUnix(now)) + ')';
   fdquery.ExecSQL;
+
+  fdquery.Close;
+  fdquery.ExecSQL('delete from timer where rowid not in (select min(rowid) from timer where status=1 group by machine_id)');
+
   turnLED(StrToInt(tables.Cells[0, tables.Row]), '1'); // Turn ON the LED
 end;
 
@@ -482,6 +472,11 @@ end;
 procedure Tmainform.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   fdconnection.Connected := false;
+  if comport.Connected then
+    begin
+      comport.Connected := false;
+      comport.Close;
+    end;
 end;
 
 procedure Tmainform.FormCreate(Sender: TObject);
@@ -597,7 +592,7 @@ procedure Tmainform.timerTimer(Sender: TObject);
 var
   i: Integer;
   timeleft: Integer;
-  f, d, a, b, c: Double;
+  f, d: Double;
   p: Integer;
   timeprice, cash: Integer;
 begin
